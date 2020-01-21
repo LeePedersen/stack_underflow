@@ -2,7 +2,8 @@
 class AnswersController < ApplicationController
 
 
-  before_action :authorize, only: [:new, :create, :edit, :destroy]
+  before_action :authorize, only: [:new, :create, :edit]
+  before_action :authorize_admin, only: [:new, :create, :edit, :destroy]
 
   def new
     @question = Question.find(params[:question_id])
