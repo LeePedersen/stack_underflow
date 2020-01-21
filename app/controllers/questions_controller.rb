@@ -3,6 +3,8 @@
 
 class QuestionsController < ApplicationController
 
+  before_action :authorize, only: [:new, :create, :edit, :destroy]
+
   def index
     @questions = Question.all
     render :index
