@@ -1,0 +1,41 @@
+<h1><%= @user.email %></h1>
+
+<% if @questions.any? %>
+<h4>Here are the questions for this user:</h4>
+
+<% @questions.each do |question| %>
+<ul>
+  <% if question.user_name == @user.email %>
+  <li>
+    <%= link_to question, question_path(@user, question) %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+<% else %>
+<p>No questions are listed for this user.</p>
+<% end %>
+
+<% if @answers.any? %>
+  <h4>Here are the answers for this user:</h4>
+
+  <% @answers.each do |answer| %>
+    <ul>
+      <% if answer.user_name == @user.email %>
+      <li>
+          <%= link_to answer.body, question_answer_path(@user, answer) %>
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <p>No answers are listed for this user.</p>
+<% end %>
+
+<p><%= link_to "Change Privileges", edit_user_path(@user) %></p>
+
+<p><%= link_to "Delete user", user_path(@user),
+                        :data => {:confirm => "Are you sure?",
+                                       :method => "delete"} %></p>
+
+<p><%= link_to "Return to users", users_path %></p>

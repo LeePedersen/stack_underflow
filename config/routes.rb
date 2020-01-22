@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers
   end
-  resources :users, only: [:create, :new]
+  resources :users
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'

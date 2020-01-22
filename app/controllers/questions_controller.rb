@@ -4,7 +4,7 @@
 class QuestionsController < ApplicationController
 
   before_action :authorize, only: [:new, :create, :edit]
-    before_action :authorize_admin, only: [:new, :create, :edit, :destroy]
+  before_action :authorize_admin, only: [:new, :create, :edit, :destroy]
 
   def index
     @questions = Question.all
@@ -13,6 +13,8 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @user = User.find(session[:user_id])
+    @user_name = @user.email
     render :new
   end
 
