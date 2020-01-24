@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
 
   def index
@@ -34,12 +35,26 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user= User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to users_path
-    else
-      render :edit
+    @user = User.find(params[:id])
+    admin_id = user_params[:admin]
+    if admin_id =="1"
+      if @user.update({"admin"=>true})
+        flash[:notice] = "success"
+        redirect_to user_path(@user)
+      else
+        flash[:notice] = "failure"
+        render :edit
+      end
+    elsif admin_id == "0"
+      if @user.update({"admin"=>false})
+        flash[:notice] = "success"
+        redirect_to user_path(@user)
+      else
+        flash[:notice] = "failure"
+        render :edit
+      end
     end
+
   end
 
   def destroy

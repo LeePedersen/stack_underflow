@@ -1,7 +1,8 @@
 <h1>Change user permissions:</h1>
 
 <%= form_for @user do |f| %>
+  <%= f.hidden_field :email, :value => @user.email %>
   <%= f.label "Admin" %>
-  <%= f.checkbox :admin %>
+  <%= f.check_box :admin%>
   <%= f.submit "Submit" %>
 <% end %>

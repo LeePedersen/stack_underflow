@@ -4,7 +4,7 @@ class User < ApplicationRecord
   attr_accessor :password
   validates_confirmation_of :password
   validates :email, :presence => true, :uniqueness => true
-  validates :password, :length => {:within => 3..20}
+  validates :password, :length => {:within => 3..20}, on: :create
   before_save :encrypt_password
 
   def encrypt_password
